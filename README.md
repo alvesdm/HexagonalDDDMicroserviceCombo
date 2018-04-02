@@ -4,7 +4,7 @@ A simple Microservice template in .net Core implementing DDD and Hexagonal Archi
 In this template you'll find:
   - .net core 2.0
   - API
-  - Worker(windows wervice? linux daemon? ...your choice! It's .net core, after all :p)
+  - Worker(windows service? linux daemon? ...your choice! It's .net core, after all :p)
   - Hexagonal architecture best practices;
   - DDD
   - Domain events with [MediatR](https://github.com/jbogard/MediatR)
