@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Threading.Tasks;
 using Application.Hosts.Ports;
@@ -47,6 +48,7 @@ namespace Host.Worker.Core
         private readonly MessageHandlerDictionary _messageHandlerDictionary = new MessageHandlerDictionary();
         private IClient _consumerBrokerClient;
         private IEnumerable<Queue> _queuesSettings;
+        private MethodInfo _bindConsumerToHandlerMethodInfo => GenericTypeHelper<Bootstrap<TService>>.GetMethodInfo(x => x.BindConsumerToHandler<IMessage, FakeHandler>());
 
         public void Run()
         {
@@ -163,12 +165,12 @@ namespace Host.Worker.Core
         {
             Type[] typeArgs = { messageHandlerMap.Key, messageHandlerMap.Value };
             this.GetType()
-                .GetMethod("BindConsumerToHandler", BindingFlags.NonPublic | BindingFlags.Instance)
+                .GetMethod(_bindConsumerToHandlerMethodInfo.Name, BindingFlags.NonPublic | BindingFlags.Instance)
                 .MakeGenericMethod(typeArgs)
                 .Invoke(this, null);
         }
 
-        private void BindConsumerToHandler<TMessage, TMessageHandler>()
+        internal void BindConsumerToHandler<TMessage, TMessageHandler>()
             where TMessage : IMessage
             where TMessageHandler : IMessageHandler<TMessage>, new()
         {
@@ -221,6 +223,36 @@ namespace Host.Worker.Core
         {
             _circuitBreakerPolicy = circuitBreakerPolicy();
             return this;
+        }
+    }
+
+    public static class GenericTypeHelper<T>
+    {
+        public static PropertyInfo GetPropertyInfo<TValue>(Expression<Func<T, TValue>> selector)
+        {
+            return (PropertyInfo)((MemberExpression)selector.Body).Member;
+        }
+
+        public static MethodInfo GetMethodInfo(Expression<Action<T>> expr)
+        {
+            return ((MethodCallExpression)expr.Body).Method.GetGenericMethodDefinition();
+        }
+
+        public static MethodInfo GetPrivateMethodInfo(Expression<Action<T>> expr)
+        {
+            return ((MethodCallExpression)expr.Body).Method.GetGenericMethodDefinition();
+        }
+    }
+
+    /// <summary>
+    /// DO NOT REMOVE this class.
+    /// It's used only by CreateConsumer method
+    /// </summary>
+    public class FakeHandler : IMessageHandler<IMessage>
+    {
+        public Task Handle(IMessage message)
+        {
+            throw new NotImplementedException();
         }
     }
 
