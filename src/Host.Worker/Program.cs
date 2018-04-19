@@ -1,12 +1,18 @@
 ﻿using System;
+using Host.Worker.Core;
 
 namespace Host.Worker
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Bootstrap<Service>
+                .Instance
+                .WithDependencies(DependenciesRegistry.Register)
+                .WithMessageHandlers(MessageHandlersRegistry.Register)
+                .WithName(()=>"BillingService")
+                .Run();
         }
     }
 }

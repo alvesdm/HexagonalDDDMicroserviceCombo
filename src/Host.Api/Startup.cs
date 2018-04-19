@@ -27,8 +27,10 @@ namespace Host.Api
         {
             services.AddMvc();
 
-            //services.AddDomainEvents(); //if no autofac
-            return services.AddAutoFac(ApplicationContainer, RegisterTypes);
+            var co = ApplicationContainer;
+            var x = services.AddAutoFac(out co, RegisterTypes);
+            ApplicationContainer = co;
+            return x;
         }
 
         private void RegisterTypes(ContainerBuilder builder)
@@ -38,6 +40,8 @@ namespace Host.Api
             builder.RegisterRepositories();
             builder.RegisterServices();
             builder.RegisterApiCommands();
+            builder.RegisterApiBus(Configuration);
+
             //builder.RegisterType<MyType>().As<IMyType>();
         }
 

@@ -7,13 +7,17 @@
   <ItemGroup>
     <!--<PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="4.1.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.0.0" />-->
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="2.0.1" />
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.2.2" />
     <PackageReference Include="MediatR" Version="4.1.0" />
+    <PackageReference Include="alvesdm.RabbitHole" Version="2.0.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Application.Hosts.Ports\Application.Hosts.Ports.csproj" />
     <ProjectReference Include="..\Application.Services.Interfaces\Application.Services.Interfaces.csproj" />
     <ProjectReference Include="..\Domain.Interfaces\Domain.Interfaces.csproj" />
+    <ProjectReference Include="..\Infrastructure.Configuration\Infrastructure.Configuration.csproj" />
   </ItemGroup>
   
 </Project>

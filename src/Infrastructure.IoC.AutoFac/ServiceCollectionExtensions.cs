@@ -9,7 +9,7 @@ namespace Infrastructure.IoC.AutoFac
     {
         public static AutofacServiceProvider AddAutoFac(
             this IServiceCollection services, 
-            IContainer applicationContainer, 
+            out IContainer applicationContainer, 
             Action<ContainerBuilder> registerTypesAction)
         {
             var builder = new ContainerBuilder();

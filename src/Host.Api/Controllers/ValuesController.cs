@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Application.Hosts.Ports.Events;
 using Domain.Entities;
 using Host.Api.Requests.Commands.Values;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+
 
 namespace Host.Api.Controllers
 {

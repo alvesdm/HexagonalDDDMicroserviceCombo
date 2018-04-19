@@ -7,6 +7,7 @@
   <ItemGroup>
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.2.2" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />
+    <PackageReference Include="alvesdm.RabbitHole" Version="2.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -15,19 +16,17 @@
 
   <ItemGroup>
     <Folder Include="Filters\" />
-    <Folder Include="Requests\Handlers\" />
-    <Folder Include="Requests\Commands\" />
-    <Folder Include="Requests\Responses\" />
-    <Folder Include="Requests\Validators\" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Application.Hosts.Ports\Application.Hosts.Ports.csproj" />
     <ProjectReference Include="..\Application.Services.Interfaces\Application.Services.Interfaces.csproj" />
     <ProjectReference Include="..\Application.Services\Application.Services.csproj" />
     <ProjectReference Include="..\Domain.Entities\Domain.Entities.csproj" />
     <ProjectReference Include="..\Host.Api.Requests.Commands\Host.Api.Requests.Commands.csproj" />
     <ProjectReference Include="..\Infrastructure.Domain.Data\Infrastructure.Domain.Data.csproj" />
     <ProjectReference Include="..\Infrastructure.Domain\Infrastructure.Domain.csproj" />
+    <ProjectReference Include="..\Infrastructure.Hosts.Ports\Infrastructure.Hosts.Ports.csproj" />
     <ProjectReference Include="..\Infrastructure.IoC.AutoFac\Infrastructure.IoC.AutoFac.csproj" />
   </ItemGroup>
 
