@@ -26,7 +26,6 @@
     <ProjectReference Include="..\Host.Api.Requests.Commands\Host.Api.Requests.Commands.csproj" />
     <ProjectReference Include="..\Infrastructure.Domain.Data\Infrastructure.Domain.Data.csproj" />
     <ProjectReference Include="..\Infrastructure.Domain\Infrastructure.Domain.csproj" />
-    <ProjectReference Include="..\Infrastructure.Hosts.Ports\Infrastructure.Hosts.Ports.csproj" />
     <ProjectReference Include="..\Infrastructure.IoC.AutoFac\Infrastructure.IoC.AutoFac.csproj" />
   </ItemGroup>
 

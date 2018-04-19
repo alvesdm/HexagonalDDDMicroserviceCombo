@@ -16,7 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Application.Hosts.Ports\Application.Hosts.Ports.csproj" />
-    <ProjectReference Include="..\Infrastructure.Hosts.Ports\Infrastructure.Hosts.Ports.csproj" />
+    <ProjectReference Include="..\Infrastructure.Configuration\Infrastructure.Configuration.csproj" />
   </ItemGroup>
 
 </Project>

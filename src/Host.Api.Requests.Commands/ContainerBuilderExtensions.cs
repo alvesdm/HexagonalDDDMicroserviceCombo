@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
 using Autofac;
-using Host.Api.Requests.Commands.Values;
+using Infrastructure.Configuration;
 using Microsoft.Extensions.Configuration;
 using RabbitHole;
 
@@ -25,9 +25,10 @@ namespace Host.Api.Requests.Commands
         {
             builder.Register(p =>
             {
+                var appName = $"{configuration.GetValue<string>(Constants.Configuration.ServiceName)}";//.{Assembly.GetEntryAssembly().GetName().Name}";
                 var _rabbitMQSettings = new Infrastructure.Configuration.Settings.RabbitMQ.Connection(configuration);
                 var client = RabbitHole.Factories.ClientFactory
-                    .Create("WebAPI")
+                    .Create(appName)
                     .WithConnection(c =>
                         c.WithHostName($"{_rabbitMQSettings.Host}:{_rabbitMQSettings.Port}")
                             .WithVirtualHost(_rabbitMQSettings.VirtualHost)
@@ -36,6 +37,16 @@ namespace Host.Api.Requests.Commands
 
                 return client;
             }).As<IClient>().InstancePerLifetimeScope();
+
+
+            builder.Register(p =>
+                {
+                    var _queuesSettings = new List<Infrastructure.Configuration.Settings.RabbitMQ.Queue>();
+                    configuration.GetSection(Constants.Configuration.Broker.Queues).Bind(_queuesSettings);
+
+                    return _queuesSettings;
+                }).As<IList<Infrastructure.Configuration.Settings.RabbitMQ.Queue>>()
+                .SingleInstance();
 
             builder.RegisterAssemblyTypes(typeof(IAmApiBus).GetTypeInfo().Assembly)
                 .Where(t => typeof(IAmApiBus).IsAssignableFrom(t))

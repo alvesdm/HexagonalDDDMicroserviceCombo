@@ -38,6 +38,7 @@ namespace Infrastructure.Domain.IoC.Events
             builder.RegisterAssemblyTypes(typeof(BaseNotificationHandler<>).GetTypeInfo().Assembly)
                 .Where(t => typeof(BaseNotificationHandler<>).IsAssignableFrom(t))
                 .AsImplementedInterfaces();
+
             return builder;
         }
     }

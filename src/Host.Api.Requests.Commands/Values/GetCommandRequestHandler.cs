@@ -3,8 +3,8 @@ using System.Threading.Tasks;
 using Application.Hosts.Ports.Commands;
 using Application.Services.Interfaces.Services;
 using Domain.Interfaces.Entities;
+using Host.Api.Requests.Commands.Bus;
 using MediatR;
-using RabbitHole;
 
 namespace Host.Api.Requests.Commands.Values
 {
@@ -26,30 +26,6 @@ namespace Host.Api.Requests.Commands.Values
             _bus.Publish(new AddTaskCommand("ha!!"));
 
             return result.Result;
-        }
-    }
-
-    public interface IAmApiBus : IBus { }
-
-    public interface IAmTodoBus : IAmApiBus
-    {
-        void Publish(AddTaskCommand message);
-    }
-
-    public class TodoBus : BusBase, IAmTodoBus
-    {
-        public TodoBus(IClient client) : base(client)
-        {
-        }
-
-        public void Publish(AddTaskCommand message)
-        {
-            Client
-                .DeclareExchange(e => e.WithName("Service1").BeingDurable(false))
-                .Publish<AddTaskCommand>(
-                    m =>
-                        m.WithExchange("Service1")
-                            .WithMessage(message));
         }
     }
 }

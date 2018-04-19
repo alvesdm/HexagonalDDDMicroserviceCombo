@@ -175,8 +175,8 @@ namespace Host.Worker.Core
             var exchangeName = _queuesSettings.First(q => q.Message.Equals(typeof(TMessage).FullName)).Exchange;
             var queueName = typeof(TMessage).FullName;
             _consumerBrokerClient
-                .DeclareExchange(c => c.WithName(exchangeName).BeingDurable(false))
-                .DeclareQueue(q => q.WithName(queueName).BeingDurable(false).BeingAutoDeleted(true))
+                .DeclareExchange(c => c.WithName(exchangeName))
+                .DeclareQueue(q => q.WithName(queueName))
                 .Consume<TMessage>(c =>
                     c.WithExchange(exchangeName)
                         .WithQueue(queueName)
