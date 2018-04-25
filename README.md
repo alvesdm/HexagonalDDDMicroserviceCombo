@@ -1,3 +1,5 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/5c0t3d9lx0ug0ier?svg=true)](https://ci.appveyor.com/project/alvesdm/hexagonaldddmicroservicetemplate)
+
 # Hexagonal(DDD) Microservice Template
 A simple Microservice template with asp.net Core 2.0 implementing Hexagonal(DDD) Architecture
 
