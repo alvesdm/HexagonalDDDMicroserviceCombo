@@ -121,7 +121,7 @@ namespace Host.Worker.Core
                 .Build();
 
             if(string.IsNullOrEmpty(_serviceName))
-                _serviceName = _configurationRoot.GetValue<string>(Constants.Configuration.ServiceName);
+                _serviceName = _configurationRoot.GetValue<string>(Constants.Configuration.Service.Name);
 
             _serviceFullName = $"{_serviceName}.{typeof(TService).FullName}";
 

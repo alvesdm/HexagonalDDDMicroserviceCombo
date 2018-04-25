@@ -15,6 +15,7 @@ In this template you'll find:
   - Error handling with [pipeline middlewares](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/middleware/?tabs=aspnetcore2x)
   - Messaging broker with rabbitMQ and [RabbitHole](https://github.com/alvesdm/RabbitHole)
   - Bearer Token Authentication & Authorization with X509SecurityKey as IssuerSigningKey
+  - Service dependencies' healthcheck(including Background worker), with [FluentCheck](https://github.com/alvesdm/FluentCheck)
 
 License
 ----

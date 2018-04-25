@@ -4,9 +4,14 @@ using System.Security.Claims;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using FluentCheck.HealthCheck;
+using FluentCheck.HealthCheck.RabbitMQHealthCheck;
+using FluentCheck.HealthCheck.UrlHealthCheck;
+using FluentCheck.HealthCheck.WorkerHealthCheck;
 using Infrastructure.Configuration;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
@@ -115,7 +120,7 @@ namespace Host.Api.IoC
                 o.AddPolicy("AccessThisServicePolicy", b =>
                 {
                     b.RequireAuthenticatedUser();
-                    b.RequireClaim(ClaimTypes.Role, configuration.GetValue<string>(Constants.Configuration.ServiceName));
+                    b.RequireClaim(ClaimTypes.Role, configuration.GetValue<string>(Constants.Configuration.Service.Name));
                     b.AuthenticationSchemes = new List<string> { JwtBearerDefaults.AuthenticationScheme };
                 });
 
@@ -124,6 +129,34 @@ namespace Host.Api.IoC
             });
 
             return services;
+        }
+
+        public static IServiceCollection AddCustomHealthCheck(this IServiceCollection services)
+        {
+            services.AddTransient<IRabbitMQHealthCheck, RabbitMQHealthCheck>();
+            services.AddTransient<IUrlHealthCheck, UrlHealthCheck>();
+            services.AddTransient<IWorkerHealthCheck, WorkerHealthCheck>();
+            services.AddHealthCheck();
+
+            return services;
+        }
+    }
+
+    public static class ApplicationBuilderExtensions
+    {
+        public static IApplicationBuilder AddCustomHealthCheck(this IApplicationBuilder app, IServiceProvider serviceProvider)
+        {
+            app.UseHealthCheck(
+                serviceProvider,
+                config =>
+                    config
+                        .Register<IRabbitMQHealthCheck>("RabbitMQ", hc => hc.WithCredentials("guest", "guest"))
+                        .Register<IUrlHealthCheck>("Google", hc => hc.WithAddress("http://google.com"))
+                        .Register<IWorkerHealthCheck>("Worker", hc => hc.WithPingAddress("/worker/ping"))
+                        .WithEndpoint("/healthcheck")
+            );
+
+            return app;
         }
     }
 

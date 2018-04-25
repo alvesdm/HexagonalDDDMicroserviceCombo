@@ -4,7 +4,11 @@
     {
         public class Configuration
         {
-            public static string ServiceName => "Service:Name";
+            public class Service
+            {
+                public static string Name => "Service:Name";
+                public static string Version => "Service:Version";
+            }
 
             public class Broker
             {
@@ -14,6 +18,12 @@
                 public static string Port => "Broker:Port";
                 public static string VirtualHost => "Broker:VirtualHost";
                 public static string Queues => "Broker:Queues";
+            }
+
+            public class Api
+            {
+                public static string BaseUri => "Api:BaseUri";
+                public static string PingBackUri => "Api:PingBackUri";
             }
         }
     }

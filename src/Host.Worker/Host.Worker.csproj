@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <PackageReference Include="Autofac" Version="4.7.0" />
+    <PackageReference Include="alvesdm.FluentCheck.WorkerHealthCheck" Version="1.1.0" />
   </ItemGroup>
 
   <ItemGroup>

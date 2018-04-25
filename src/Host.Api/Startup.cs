@@ -28,6 +28,7 @@ namespace Host.Api
             services.AddCustomMvc(Configuration);
             services.AddCustomAuthorization(Configuration);
             services.AddCustomAuthentication(Configuration);
+            services.AddCustomHealthCheck();
 
             var serviceProvider = services.AddAutoFac(out var applicationContext, RegisterTypes);
             ApplicationContainer = applicationContext;
@@ -46,7 +47,7 @@ namespace Host.Api
             //builder.RegisterType<MyType>().As<IMyType>();
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IApplicationLifetime appLifetime)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IApplicationLifetime appLifetime, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -54,6 +55,7 @@ namespace Host.Api
             }
             app.UseUnhandledErrorMiddlewareExtension();
             app.UseAuthentication();
+            app.AddCustomHealthCheck(serviceProvider);
             app.UseMvc();
 
             appLifetime.ApplicationStopped.Register(() => ApplicationContainer.Dispose());

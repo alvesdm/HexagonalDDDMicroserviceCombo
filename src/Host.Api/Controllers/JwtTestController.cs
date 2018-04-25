@@ -42,7 +42,7 @@ namespace Host.Api.Controllers
                 new Claim(JwtRegisteredClaimNames.Jti, await _jwtOptions.JtiGenerator()),
                 new Claim(JwtRegisteredClaimNames.Iat, JwtIssuerOptions.ToUnixEpochDate(_jwtOptions.IssuedAt).ToString(), ClaimValueTypes.Integer64),
 
-                new Claim(ClaimTypes.Role, _configuration.GetValue<string>(Constants.Configuration.ServiceName)),
+                new Claim(ClaimTypes.Role, _configuration.GetValue<string>(Constants.Configuration.Service.Name)),
                 new Claim(ClaimTypes.Role, "UserTypeA"),
                 new Claim(ClaimTypes.Role, "UserTypeB")
             };

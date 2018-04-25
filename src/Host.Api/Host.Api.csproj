@@ -9,6 +9,9 @@
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />
     <PackageReference Include="alvesdm.RabbitHole" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="2.0.3" />
+    <PackageReference Include="alvesdm.FluentCheck.RabbitMQHealthCheck" Version="1.1.0" />
+    <PackageReference Include="alvesdm.FluentCheck.UrlHealthCheck" Version="1.1.0" />
+    <PackageReference Include="alvesdm.FluentCheck.WorkerHealthCheck" Version="1.1.0" />
   </ItemGroup>
 
   <ItemGroup>

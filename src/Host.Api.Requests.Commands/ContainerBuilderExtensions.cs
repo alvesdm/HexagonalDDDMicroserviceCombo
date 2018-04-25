@@ -25,7 +25,7 @@ namespace Host.Api.Requests.Commands
         {
             builder.Register(p =>
             {
-                var appName = $"{configuration.GetValue<string>(Constants.Configuration.ServiceName)}";//.{Assembly.GetEntryAssembly().GetName().Name}";
+                var appName = $"{configuration.GetValue<string>(Constants.Configuration.Service.Name)}";//.{Assembly.GetEntryAssembly().GetName().Name}";
                 var _rabbitMQSettings = new Infrastructure.Configuration.Settings.RabbitMQ.Connection(configuration);
                 var client = RabbitHole.Factories.ClientFactory
                     .Create(appName)
