@@ -14,6 +14,7 @@ In this template you'll find:
   - Mediator patttern with [MediatR](https://github.com/jbogard/MediatR)
   - Error handling with [pipeline middlewares](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/middleware/?tabs=aspnetcore2x)
   - Messaging broker with rabbitMQ and [RabbitHole](https://github.com/alvesdm/RabbitHole)
+  - Bearer Token Authentication & Authorization with X509SecurityKey as IssuerSigningKey
 
 License
 ----

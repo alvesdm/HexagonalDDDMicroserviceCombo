@@ -3,11 +3,15 @@ using System.Threading.Tasks;
 using Domain.Entities;
 using Host.Api.Requests.Commands.Values;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 
 namespace Host.Api.Controllers
 {
+    /* Looking for a token?
+     * http://localhost:52836/api/JwtTest
+     */
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
@@ -20,6 +24,8 @@ namespace Host.Api.Controllers
 
         // GET api/values
         [HttpGet]
+        [Authorize("PolicyUserTypeA")]
+        [Authorize("PolicyUserTypeB")]
         public async Task<Guid> Get()
         {
             var item = new Item

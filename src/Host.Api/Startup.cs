@@ -25,12 +25,13 @@ namespace Host.Api
 
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddCustomMvc(Configuration);
+            services.AddCustomAuthorization(Configuration);
+            services.AddCustomAuthentication(Configuration);
 
-            var co = ApplicationContainer;
-            var x = services.AddAutoFac(out co, RegisterTypes);
-            ApplicationContainer = co;
-            return x;
+            var serviceProvider = services.AddAutoFac(out var applicationContext, RegisterTypes);
+            ApplicationContainer = applicationContext;
+            return serviceProvider;
         }
 
         private void RegisterTypes(ContainerBuilder builder)
@@ -52,6 +53,7 @@ namespace Host.Api
                 app.UseDeveloperExceptionPage();
             }
             app.UseUnhandledErrorMiddlewareExtension();
+            app.UseAuthentication();
             app.UseMvc();
 
             appLifetime.ApplicationStopped.Register(() => ApplicationContainer.Dispose());

@@ -8,6 +8,7 @@
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.2.2" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />
     <PackageReference Include="alvesdm.RabbitHole" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="2.0.3" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,6 +28,12 @@
     <ProjectReference Include="..\Infrastructure.Domain.Data\Infrastructure.Domain.Data.csproj" />
     <ProjectReference Include="..\Infrastructure.Domain\Infrastructure.Domain.csproj" />
     <ProjectReference Include="..\Infrastructure.IoC.AutoFac\Infrastructure.IoC.AutoFac.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="local.myservice.com.pfx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
