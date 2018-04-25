@@ -16,6 +16,7 @@ In this template you'll find:
   - Messaging broker with rabbitMQ and [RabbitHole](https://github.com/alvesdm/RabbitHole)
   - Bearer Token Authentication & Authorization with X509SecurityKey as IssuerSigningKey
   - Service dependencies' healthcheck(including Background worker), with [FluentCheck](https://github.com/alvesdm/FluentCheck)
+  - No Service discovery implemented since we are very enthusiatic about docker orhcestrators like Docker Swarm and Kubertenes and both provide really nice SD feature out of the box. Now in case you want to have it, you might wanna check out this package[FluentDicovery](https://github.com/alvesdm/FluentDicovery)
 
 License
 ----
