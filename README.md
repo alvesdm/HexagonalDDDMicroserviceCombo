@@ -1,9 +1,9 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/5c0t3d9lx0ug0ier?svg=true)](https://ci.appveyor.com/project/alvesdm/hexagonaldddmicroservicetemplate)
 
-# Hexagonal(DDD) Microservice Template
-A simple Microservice template with asp.net Core 2.0 implementing Hexagonal(DDD) Architecture
+# Hexagonal(DDD) Microservice Combo
+A simple Microservice conbo(mix of all good practices) with asp.net Core 2.0 implementing Hexagonal(DDD) Architecture
 
-In this template you'll find:
+In this combo you'll find:
   - asp.net core 2.0;
   - An API so that other microservices can communicate with it;
   - Worker(windows service? linux daemon? ...your choice! It's .net core, after all :p) with [PeterKottas DotNetCore.WindowsService](https://github.com/PeterKottas/DotNetCore.WindowsService) package that offers most(if not all) features you would find in TopShelf which unfirtunately is not .net core friendly yet;
